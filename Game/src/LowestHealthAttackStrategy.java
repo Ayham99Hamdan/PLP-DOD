@@ -8,10 +8,13 @@
  *
  * @author USER
  */
-public interface LowestHealthAttackStrategy extends AttackStrategy{
+public class LowestHealthAttackStrategy implements AttackStrategy{
 
     @Override
-    public abstract /* return type must be Unit object*/void prioritizeUnitToAttack(/*Unit referance*/);
+    public  /* return type must be Unit object*/void prioritizeUnitToAttack(/*Unit referance*/){
+    
+    
+    };
     
     
     

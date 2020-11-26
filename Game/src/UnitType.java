@@ -8,12 +8,9 @@
  *
  * @author USER
  */
-public  class HighestDamageAttackStrategy implements AttackStrategy{
+public enum UnitType {
     
-    @Override
-    public  /* return type must be unit*/ void prioritizeUnitToAttack(/*Unit referance*/){
-    
-    
-    };
+    TeslaTank,
+    Sniper
     
 }
