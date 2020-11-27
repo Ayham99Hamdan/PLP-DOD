@@ -8,12 +8,11 @@
  *
  * @author USER
  */
-public class UnitFactory {
+public enum GameState {
     
-    public /* return type must be unit object*/ void createUnit(){
-    
-        
-    
-    }
+    Runnig,
+    AttackerWon,
+    DeffenderWon,
+    Paused
     
 }

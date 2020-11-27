@@ -8,12 +8,6 @@
  *
  * @author USER
  */
-public class UnitFactory {
-    
-    public /* return type must be unit object*/ void createUnit(){
-    
-        
-    
-    }
+public class Team {
     
 }

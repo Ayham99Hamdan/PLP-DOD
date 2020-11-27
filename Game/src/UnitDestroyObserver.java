@@ -8,12 +8,8 @@
  *
  * @author USER
  */
-public class UnitFactory {
+public interface UnitDestroyObserver {
     
-    public /* return type must be unit object*/ void createUnit(){
-    
-        
-    
-    }
+    public void onUnitDestroy(/*destroyUnit*/);
     
 }

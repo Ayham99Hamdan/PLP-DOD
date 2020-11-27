@@ -8,12 +8,15 @@
  *
  * @author USER
  */
-public class UnitFactory {
+public class Player {
     
-    public /* return type must be unit object*/ void createUnit(){
+    protected int teamId;
+    protected int coins;
     
-        
+    public void newGame(){};
     
-    }
+    public void loadGame(){};
+    
+    public void bayUnit(){};
     
 }
