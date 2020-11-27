@@ -10,10 +10,26 @@
  */
 public  class HighestDamageAttackStrategy implements AttackStrategy{
     
+    /* To implements Singleton design pattern*/
+    private static HighestDamageAttackStrategy instance = null;
+    
+    public static HighestDamageAttackStrategy getInstance (){
+    
+        if(instance == null) {
+        
+            instance = new HighestDamageAttackStrategy();
+            
+        }
+        return instance;
+    
+    }  
+    private HighestDamageAttackStrategy(){}
     @Override
-    public  /* return type must be unit*/ void prioritizeUnitToAttack(/*Unit referance*/){
+    public  /* return type must be unit*/ void prioritizeUnitToAttack(/*Unit array referance*/){
     
-    
-    };
+        /*form  this array this function will return referance to the Highest Dammage Unit to select that unit as target and attack it*/
+        
+        
+    }
     
 }
