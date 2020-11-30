@@ -8,12 +8,11 @@
  *
  * @author USER
  */
-public class HealthUnitProperty extends UnitProperty{
+public class AttackRangeUnitProperty extends UnitProperty{
 
-    public HealthUnitProperty(double Value) {
+    public AttackRangeUnitProperty(double Value) {
         super(Value);
     }
-    
     
     
     

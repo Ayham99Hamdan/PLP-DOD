@@ -8,16 +8,19 @@
  *
  * @author USER
  */
-public abstract class UnitAttack {
+public  class UnitAttack {
     
     protected UnitAttack unitAttack;
-    private AttackResult attackResult;
+    
 
     protected UnitAttack(UnitAttack unitAttack) {
         this.unitAttack = unitAttack;
     }
     
-    public abstract AttackResult PerformAttack(/*UNIT Refeance*/);
+    public  void PerformAttack(Unit unit){
+    
+    
+    }
     
     
 }

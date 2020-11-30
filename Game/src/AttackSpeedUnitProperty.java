@@ -9,5 +9,9 @@
  * @author USER
  */
 public class AttackSpeedUnitProperty extends UnitProperty{
+
+    public AttackSpeedUnitProperty(double Value) {
+        super(Value);
+    }
     
 }

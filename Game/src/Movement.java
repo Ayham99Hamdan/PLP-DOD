@@ -8,13 +8,8 @@
  *
  * @author USER
  */
-public class HealthUnitProperty extends UnitProperty{
-
-    public HealthUnitProperty(double Value) {
-        super(Value);
-    }
+public abstract class Movement {
     
-    
-    
+    public abstract void move(Unit unit);
     
 }

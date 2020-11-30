@@ -9,5 +9,9 @@
  * @author USER
  */
 public class ArmorUnitProperty extends UnitProperty{
+
+    public ArmorUnitProperty(double Value) {
+        super(Value);
+    }
     
 }

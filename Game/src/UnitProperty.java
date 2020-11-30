@@ -12,6 +12,11 @@ public   class UnitProperty {
     
     private double propertyValue;
     
+    public UnitProperty(double Value){
+        
+        this.propertyValue = Value;
+    
+    };
     // I Think It must have Getter and setter to handle this attribute
     public double getPropertyValue() {
         return propertyValue;

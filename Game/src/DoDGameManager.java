@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,14 +14,24 @@
 public class DoDGameManager implements UnitDestroyObserver{
     
     private static DoDGameManager instance = null;
+    
     private Grid grid;
-    /*main base as unit*/
+    private Unit mainBase;
     private int remainingAttackerUnit;
     private double remainingTime;
-    /*list of team */
+    private ArrayList<Team> teams;
     private UnitFactory unitFactory;
     
-    private DoDGameManager(){}
+    private DoDGameManager(){
+    
+        grid = Grid.getInstance();
+        teams = new ArrayList();
+        DeffenderTeam Deffender = DeffenderTeam.getInstance();
+        AttackerTeam Attacker = AttackerTeam.getInstance();
+        teams.add(Deffender);
+        teams.add(Attacker);
+        
+    }
     
     public static DoDGameManager getInstance(){
     
@@ -36,5 +49,10 @@ public class DoDGameManager implements UnitDestroyObserver{
         
     }
     
+    public void BayUnit(Player player, int X, int Y,UnitType unitType){
+    
+        grid.addUnit(unitFactory.createUnit(player, X,Y,unitType));
+        
+    }
     
 }

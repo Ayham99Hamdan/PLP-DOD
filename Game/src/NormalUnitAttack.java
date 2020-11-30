@@ -14,10 +14,10 @@ public class NormalUnitAttack extends UnitAttack{
         super(unitAttack);
     }
 
-    @Override
-    public AttackResult PerformAttack() {
+    
+    public void PerformAttack() {
        
-        return new AttackResult(null);
+        
     }
     
 }

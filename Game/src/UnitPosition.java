@@ -38,9 +38,16 @@ public class UnitPosition {
         this.radius = radius;
     }
     
-    public boolean squareIsOccupied(){
-    
-        return true;
+    public boolean squareIsOccupied(int x, int y){
+
+        if(centerX == x && centerY ==y){
+        
+            return true;
+        
+        }else{
+            return false;
+        }
+        
     
     }
     
