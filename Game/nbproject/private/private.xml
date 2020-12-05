@@ -3,7 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/GameState.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/Unit.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/LowestHealthAttackStrategy.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/UnitType.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/HighestDamageAttackStrategy.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/AttackerMovement.java</file>
             <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/UnitAttack.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/AttackStrategy.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/DoDGameManager.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/DeffenderMovement.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/Grid.java</file>
+            <file>file:/C:/Users/USER/Desktop/java%20lab/Lab/DOD%20GAME/PLP-DOD/Game/src/NormalUnitAttack.java</file>
         </group>
     </open-files>
 </project-private>

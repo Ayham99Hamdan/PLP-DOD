@@ -1,4 +1,6 @@
 
+import java.io.BufferedReader;
+import java.nio.Buffer;
 import java.util.Scanner;
 
 /*
@@ -6,41 +8,51 @@ import java.util.Scanner;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author USER
  */
-public class ConsolePlayer extends Player{
+public class ConsolePlayer extends Player {
 
     @Override
-    public void  newGame() {
+    public void newGame() {
         Scanner read = new Scanner(System.in);
-        System.out.println("Welcome to DOD Game");
-        System.out.println("Please Enter Your Name :");
-        this.playerName = read.nextLine();
-        System.out.println("Select Team You Want To Join In [1]-Deffender [2]-Attacker");
-        this.teamId = read.nextInt();
-        if(teamId == 1){
-            
-            DeffenderTeam Deffender = DeffenderTeam.getInstance();
-            Deffender.addPlayerToTeam(this);
-            
-        } else {
         
-            AttackerTeam Attacker = AttackerTeam.getInstance();
-            Attacker.addPlayerToTeam(this);
-            
-        
+        System.out.println("how many Players:");
+        int NumberOfPlayer = read.nextInt();
+        for (int i = 0; i < NumberOfPlayer; i++) {
+            Player player = new Player();
+            System.out.println("Player " + (i + 1) + " Please Enter Your Name :");
+            String playerName = read.next();
+            player.setPlayerName(playerName);
+            System.out.println("Select Team You Want To Join In [1]-Deffender [2]-Attacker");
+            int teamId = read.nextInt();
+            if (teamId == 1) {
+
+                DeffenderTeam Deffender = DeffenderTeam.getInstance();
+                player.setTeamId(1);
+                Deffender.addPlayerToTeam(player);
+
+            } else {
+
+                AttackerTeam Attacker = AttackerTeam.getInstance();
+                player.setTeamId(2);
+                Attacker.addPlayerToTeam(player);
+
+            }
+
         }
         
-       
+        DoDGameManager.getInstance().gameInit();
+        
+
     }
-    public static void main(String args[]){
     
+
+    public static void main(String args[]) {
+
         new ConsolePlayer().newGame();
+        
     }
-    
-    
-    
+
 }

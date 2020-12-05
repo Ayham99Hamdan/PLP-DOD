@@ -40,7 +40,7 @@ public class UnitPosition {
     
     public boolean squareIsOccupied(int x, int y){
 
-        if(centerX == x && centerY ==y){
+        if((centerX + radius >= x && centerX - radius <= x) && (centerY + radius >= y && centerY - radius <= y)){
         
             return true;
         

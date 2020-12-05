@@ -31,5 +31,16 @@ public  class Team {
     
         return teamUnitsInitializationPositions.addAll(postions);
     }
-           
+    
+    public void getTeamReady(){
+    
+    for(Player player : players){
+    
+        System.out.print(player.playerName);
+        player.bayUnit();
+    
+    }
+    
+    }
+    
 }

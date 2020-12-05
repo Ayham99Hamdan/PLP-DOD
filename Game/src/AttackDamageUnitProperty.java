@@ -1,6 +1,3 @@
-
-import java.util.List;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,9 +8,10 @@ import java.util.List;
  *
  * @author USER
  */
-public interface AttackStrategy {
-    
-    public  Unit prioritizeUnitToAttack(List<Unit> list);
-    
+public class AttackDamageUnitProperty extends UnitProperty{
+
+    public AttackDamageUnitProperty(double Value) {
+        super(Value);
+    }
     
 }

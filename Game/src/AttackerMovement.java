@@ -30,8 +30,35 @@ public class AttackerMovement extends Movement {
     public void move(Unit unit) {
 
         Grid grid = Grid.getInstance();
-        int x = 0, y = 0;
-        grid.acceptUnitMovement(unit, x, y);
+        int x = unit.getPosition().getCenterX();
+        int y = unit.getPosition().getCenterY();
+        int speed = (int) unit.getProperties().get(5).getPropertyValue();
+        Unit mainbase = DoDGameManager.getInstance().getMainBase();/**/
+        
+        if(mainbase.getPosition().getCenterX() < x && grid.acceptUnitMovement(unit, x - speed, y)){
+        
+        x = x - speed;
+        
+        } else if(grid.acceptUnitMovement(unit, x + speed, y)) {
+        
+        x = x + speed;
+        
+        }
+        if(mainbase.getPosition().getCenterY() < y && grid.acceptUnitMovement(unit, x , y - speed)){
+        
+        y = y - speed;
+        
+        } else if(grid.acceptUnitMovement(unit, x , y + speed)) {
+        
+        y = y + speed;
+        
+        }
+        
+        grid.removeUnit(unit);
+        unit.getPosition().setCenterX(x);
+        unit.getPosition().setCenterY(y);
+        grid.addUnit(unit);
+        System.out.println("this is X: " + x + "\nthis is Y: " + y);
 
     }
 

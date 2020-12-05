@@ -14,10 +14,16 @@ public class NormalUnitAttack extends UnitAttack{
         super(unitAttack);
     }
 
-    
-    public void PerformAttack() {
-       
         
+
+    @Override
+    public void PerformAttack(Unit unit, double damage) {
+        
+        System.out.println("Kaka");
+        unit.acceptDamage(damage);
     }
+
+    
+    
     
 }

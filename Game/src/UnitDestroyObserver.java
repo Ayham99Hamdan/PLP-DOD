@@ -10,6 +10,6 @@
  */
 public interface UnitDestroyObserver {
     
-    public void onUnitDestroy(/*destroyUnit*/);
+    public void onUnitDestroy(Unit unit);
     
 }

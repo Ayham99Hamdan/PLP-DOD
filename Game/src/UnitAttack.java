@@ -17,9 +17,10 @@ public  class UnitAttack {
         this.unitAttack = unitAttack;
     }
     
-    public  void PerformAttack(Unit unit){
+    public  void PerformAttack(Unit unit, double damage){
     
-    
+        unitAttack.PerformAttack(unit, damage);
+        
     }
     
     

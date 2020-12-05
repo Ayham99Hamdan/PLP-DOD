@@ -12,12 +12,12 @@ import java.util.List;
  *
  * @author USER
  */
-public class Unit {
+public class Unit extends Thread{
     
     private Unit _next = null;
     private Unit _prev = null;
     private UnitAttack activeUnitAttack ;
-    private UnitType canAttack; 
+    private Type[] canAttack; 
     private Movement movement;
     private UnitPosition position;
     private Unit targetedUnit;
@@ -27,6 +27,8 @@ public class Unit {
     private UnitDestroyObserver destructionObservers;
     private Player owner;
     private AttackStrategy attackStrategy;
+    private Grid grid = Grid.getInstance();
+   // public  Thread thisThread = new Thread(this);
     public Unit getNext() {
         return _next;
     }
@@ -59,13 +61,15 @@ public class Unit {
         this.activeUnitAttack = activeUnitAttack;
     }
 
-    public UnitType getCanAttack() {
+    public Type[] getCanAttack() {
         return canAttack;
     }
 
-    public void setCanAttack(UnitType canAttack) {
+    public void setCanAttack(Type[] canAttack) {
         this.canAttack = canAttack;
     }
+
+    
 
     public UnitPosition getPosition() {
         return position;
@@ -74,15 +78,46 @@ public class Unit {
     public void setPosition(UnitPosition position) {
         this.position = position;
     }
-    public Unit(Grid grid, int x, int y, AttackStrategy attackStrategy, Player owner, ArrayList<UnitProperty> propertys,Movement movement, UnitType Type){
-    
-        this.position.setCenterX(x);
-        this.position.setCenterY(y);
-        this.attackStrategy = attackStrategy;
-        this.owner = owner;
-        this.properties = propertys;
+
+    public Movement getMovement() {
+        return movement;
+    }
+
+    public void setMovement(Movement movement) {
         this.movement = movement;
-        this.unitType = Type;
+    }
+
+    public UnitType getUnitType() {
+        return unitType;
+    }
+
+    public void setUnitType(UnitType unitType) {
+        this.unitType = unitType;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+    
+    
+    
+    public Unit(AttackStrategy attackStrategy, ArrayList<UnitProperty> properties){
+    
+       
+        this.attackStrategy = attackStrategy;
+        
+        this.properties = properties;
+        
+        
+        this.activeUnitAttack = new NormalUnitAttack(null);
+        
+        unitDestroyedObservers = new ArrayList();
+        
+        
     
     }
     
@@ -95,5 +130,60 @@ public class Unit {
         
         this.properties.get(0).setPropertyValue(unitHealth - discountHealth);
     }
+    
+    public void attackUnit(){
+    
+    //this.targetedUnit = attackStrategy.prioritizeUnitToAttack(Grid.getInstance().getAllUnitInRange(this));
+    
+        
+    activeUnitAttack.PerformAttack(targetedUnit, this.getProperties().get(2).getPropertyValue());
+    System.out.println("this is health " + targetedUnit.getProperties().get(0).getPropertyValue());
+    
+    }
+    public void addUnitDestroyObserver(UnitDestroyObserver unitDestroyObserver){
+    
+        unitDestroyedObservers.add(unitDestroyObserver);
+    
+    }
+    public void onDestroy(){
+        
+        System.out.println("2222222222222222222222222222222222222222222222222");
+        DoDGameManager.getInstance().onUnitDestroy(this);
+        this.stop();
+    }
+
+    public UnitDestroyObserver getDestructionObservers() {
+        return destructionObservers;
+    }
+
+    public void setDestructionObservers(UnitDestroyObserver destructionObservers) {
+        this.destructionObservers = destructionObservers;
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            this.targetedUnit = attackStrategy.prioritizeUnitToAttack(Grid.getInstance().getAllUnitInRange(this));
+            System.out.println(this.unitType.getName());
+            if(properties.get(0).getPropertyValue() <= 0){
+                
+                
+                onDestroy();
+            
+            }
+            if(this.targetedUnit == null){
+                movement.move(this);
+            
+            } else {
+                System.out.println(" I am the target");
+                attackUnit();
+            
+            }      
+        
+        }
+        
+        
+    }
+    
 
 }

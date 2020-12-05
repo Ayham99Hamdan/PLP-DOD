@@ -14,10 +14,14 @@ public class AreaOfDestructionUnitAttack extends UnitAttack{
         super(unitAttack);
     }
 
-    
-    public AttackResult PerformAttack() {
+    @Override
+    public void PerformAttack(Unit unit, double damage) {
         
-        return new AttackResult(null);
+        
+        
     }
+
+    
+    
     
 }
