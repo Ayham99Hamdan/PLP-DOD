@@ -1,6 +1,15 @@
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,9 +37,39 @@ public class Unit extends Thread{
     private Player owner;
     private AttackStrategy attackStrategy;
     private Grid grid = Grid.getInstance();
-   // public  Thread thisThread = new Thread(this);
+    private guiUnit Graphic;
+    public class guiUnit extends StackPane{
+        
+        ImageView img ;
+        public guiUnit() throws FileNotFoundException {
+            System.out.println(unitType.getName());
+            img = new ImageView(new Image(new FileInputStream("C:\\Users\\USER\\Desktop\\java lab\\image play\\" + unitType.getName()+ ".jpg")));
+            int posX = position.getCenterX()/10 - 500;
+            int posY = position.getCenterY()/10 - 500;
+            this.setTranslateX(posX);
+            this.setTranslateY(posY);
+            img.setFitWidth(position.getRadius() * 2);
+            img.setFitHeight( position.getRadius() * 2);
+            this.setMaxSize(position.getRadius() * 2, position.getRadius() * 2);
+            this.getChildren().add(img);
+            this.setStyle("-fx-border-color: #000;\n"
+                + "    -fx-border-width: 1px;\n"
+                + "    -fx-border-style: solid;");
+        }
+        
+        
+      
+    }
     public Unit getNext() {
         return _next;
+    }
+
+    public guiUnit getGraphic() {
+        return Graphic;
+    }
+
+    public void setGraphic(guiUnit Graphic) {
+        this.Graphic = Graphic;
     }
 
     public void setNext(Unit _next) {
@@ -105,7 +144,7 @@ public class Unit extends Thread{
     
     
     
-    public Unit(AttackStrategy attackStrategy, ArrayList<UnitProperty> properties){
+    public Unit(AttackStrategy attackStrategy, ArrayList<UnitProperty> properties) throws FileNotFoundException{
     
        
         this.attackStrategy = attackStrategy;
@@ -116,6 +155,7 @@ public class Unit extends Thread{
         this.activeUnitAttack = new NormalUnitAttack(null);
         
         unitDestroyedObservers = new ArrayList();
+        
         
         
     
@@ -137,7 +177,7 @@ public class Unit extends Thread{
     
         
     activeUnitAttack.PerformAttack(targetedUnit, this.getProperties().get(2).getPropertyValue());
-    System.out.println("this is health " + targetedUnit.getProperties().get(0).getPropertyValue());
+
     
     }
     public void addUnitDestroyObserver(UnitDestroyObserver unitDestroyObserver){
@@ -145,9 +185,9 @@ public class Unit extends Thread{
         unitDestroyedObservers.add(unitDestroyObserver);
     
     }
-    public void onDestroy(){
+    public void onDestroy() throws FileNotFoundException{
         
-        System.out.println("2222222222222222222222222222222222222222222222222");
+
         DoDGameManager.getInstance().onUnitDestroy(this);
         this.stop();
     }
@@ -159,23 +199,33 @@ public class Unit extends Thread{
     public void setDestructionObservers(UnitDestroyObserver destructionObservers) {
         this.destructionObservers = destructionObservers;
     }
+    
+    public void craete() throws FileNotFoundException{
+    
+        Graphic = new guiUnit();
+    
+    }
 
     @Override
     public void run() {
         while(true){
             this.targetedUnit = attackStrategy.prioritizeUnitToAttack(Grid.getInstance().getAllUnitInRange(this));
-            System.out.println(this.unitType.getName());
+            
             if(properties.get(0).getPropertyValue() <= 0){
                 
                 
-                onDestroy();
+                try {
+                    onDestroy();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Unit.class.getName()).log(Level.SEVERE, null, ex);
+                }
             
             }
             if(this.targetedUnit == null){
                 movement.move(this);
             
             } else {
-                System.out.println(" I am the target");
+                
                 attackUnit();
             
             }      

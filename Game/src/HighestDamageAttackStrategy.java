@@ -35,7 +35,7 @@ public class HighestDamageAttackStrategy implements AttackStrategy {
         /*form  this array this function will return referance to the Highest Dammage Unit to select that unit as target and attack it*/
         if (list.isEmpty()) {
             
-            System.out.println(" I return Null");
+            
             return null;
             
 

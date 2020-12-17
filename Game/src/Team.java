@@ -25,6 +25,7 @@ public  class Team {
     
         players.add(player);
     
+    
     }
     
     public boolean initializePositions(ArrayList<UnitPosition> postions){
@@ -36,11 +37,13 @@ public  class Team {
     
     for(Player player : players){
     
-        System.out.print(player.playerName);
+        
         player.bayUnit();
     
     }
     
     }
+     
+    
     
 }

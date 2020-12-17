@@ -1,5 +1,6 @@
 
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class UnitFactory {
     
     Scanner read = new Scanner(System.in);
     
-    public Unit createUnit(UnitType Type) {
+    public Unit createUnit(UnitType Type , int strategyId) throws FileNotFoundException {
         
         
         AttackStrategy strategy = null;
@@ -25,9 +26,7 @@ public class UnitFactory {
         ArrayList<UnitProperty> propertys = new ArrayList();
         
         
-        System.out.println("Lowest [1] highest[2]");
         
-        int strategyId = read.nextInt();
         if(strategyId == 1){
             
             strategy = LowestHealthAttackStrategy.getInstance();

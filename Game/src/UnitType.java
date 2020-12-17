@@ -14,7 +14,7 @@ public enum UnitType {
 
     TeslaTank(Type.Tank, "TeslaTank", 1000, 0.5, 300, 250, 0.60, 20, 30,new Type[]{Type.Tank,Type.Solider}, 50),
     Sniper(Type.Solider, "Sniper",250,0.10, 75, 700, 0.4, 3, 10, new Type[]{Type.Solider}, 5),
-    MirageTank(Type.Tank,"MirageTank", 750, 0.10, 1000, 10, 1, 15, 60, new Type[]{Type.Tank,Type.Solider, Type.Structure}, 70),
+    MirageTank(Type.Tank,"MirageTank", 750, 0.10, 1000, 100, 1, 15, 60, new Type[]{Type.Tank,Type.Solider, Type.Structure}, 70),
     Infantry(Type.Solider, "Infantry", 250, 0.20, 50, 50, 1.5, 3, 10, new Type[]{Type.Solider}, 3),
     GrizzlyTank(Type.Solider, "GrizzlyTank", 1000, 0.40, 250, 250, 0.60, 20, 30, new Type[]{Type.Tank,Type.Solider, Type.Structure}, 50),
     NavySEAL(Type.Solider, "NavySEAL", 400, 0.20, 60, 50, 2, 3, 20, new Type[]{Type.Tank,Type.Solider}, 10),
@@ -24,7 +24,7 @@ public enum UnitType {
     PrismTower(Type.Structure, "PrismTower", 4000, 0.70, 100, 200, 0.50, 30, 0, new Type[]{Type.Tank,Type.Solider}, 150),
     GrandCannon(Type.Structure, "GrandCannon", 6500, 0.30, 150, 400, 0.90, 40, 0, new Type[]{Type.Tank,Type.Solider}, 200),
     MainBase(Type.Structure, "MainBase", 10000, 0, 0,0 , 0 ,50, 0, null, 0),
-    BlackEagle(Type.Airplane, "BlackEagle", 1500, 0, 400, 30, 0 , 0, 100, new Type[]{Type.Structure}, 75),
+    BlackEagle(Type.Airplane, "BlackEagle", 1500, 0, 400, 30, 0 , 50, 100, new Type[]{Type.Structure}, 75),
     PatriotMissileSystem(Type.Structure, "PatriotMissileSystem", 2500, 0.20, 50, 400, 0.90, 40, 0, new Type[]{Type.Airplane}, 175)
     ;
     

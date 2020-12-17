@@ -58,7 +58,7 @@ public class AttackerMovement extends Movement {
         unit.getPosition().setCenterX(x);
         unit.getPosition().setCenterY(y);
         grid.addUnit(unit);
-        System.out.println("this is X: " + x + "\nthis is Y: " + y);
+        
 
     }
 

@@ -1,4 +1,5 @@
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /*
@@ -22,7 +23,7 @@ public class DoDGameManager implements UnitDestroyObserver {
     private UnitFactory unitFactory;
     private GameState status;
 
-    private DoDGameManager() {
+    private DoDGameManager() throws FileNotFoundException {
 
         grid = Grid.getInstance();
         teams = new ArrayList();
@@ -32,7 +33,7 @@ public class DoDGameManager implements UnitDestroyObserver {
         teams.add(Attacker);
         unitFactory = new UnitFactory();
 
-        mainBase = unitFactory.createUnit(UnitType.MainBase);
+        mainBase = unitFactory.createUnit(UnitType.MainBase, 1);
         mainBase.setPosition(new UnitPosition());
         mainBase.getPosition().setCenterX(600);
         mainBase.getPosition().setCenterY(600);
@@ -40,11 +41,13 @@ public class DoDGameManager implements UnitDestroyObserver {
         mainBase.setOwner(Deffender.DeffenderPlayerForMainBase());
         mainBase.setUnitType(UnitType.MainBase);
         mainBase.setMovement(DeffenderMovement.getInstance());
+        mainBase.craete();
+        Arena.getInstance().getChildren().add(mainBase.getGraphic());
         grid.addUnit(mainBase);
-
+       
     }
 
-    public static DoDGameManager getInstance() {
+    public static DoDGameManager getInstance() throws FileNotFoundException {
 
         if (instance == null) {
 
@@ -61,7 +64,7 @@ public class DoDGameManager implements UnitDestroyObserver {
         if (unit.getOwner().teamId == 2) {
 
             remainingAttackerUnit--;
-            System.out.print("Fras");
+            
 
         }
 
@@ -89,10 +92,10 @@ public class DoDGameManager implements UnitDestroyObserver {
         this.mainBase = mainBase;
     }
 
-    public void BayUnit(Player player, int X, int Y, UnitType unitType) {
+    public void BayUnit(Player player, int X, int Y, UnitType unitType, int strategyId) throws FileNotFoundException {
 
         if (player.coins >= unitType.getUnitPrice()) {
-            Unit unit = unitFactory.createUnit(unitType);
+            Unit unit = unitFactory.createUnit(unitType, strategyId);
             player.coins = player.coins - unitType.getUnitPrice();
             unit.setPosition(new UnitPosition());
             unit.getPosition().setCenterX(X);
@@ -113,21 +116,19 @@ public class DoDGameManager implements UnitDestroyObserver {
 
                 unit.setMovement(AttackerMovement.getInstance());
                 remainingAttackerUnit++;
-                System.out.println("Attacker");
+                
             }
-
+            unit.craete();
+            Arena.getInstance().getChildren().add(unit.getGraphic());
             grid.addUnit(unit);
-        } else {
-
-            System.out.println("You don't have enough coins");
-
-        }
+        } 
     }
 
     public void gameLoop() {
 
         while (status.equals(GameState.Runnig)) {
-
+            
+            grid.printBoardInfo();
             if (mainBase.getProperties().get(0).getPropertyValue() <= 0) {
 
                 status = GameState.AttackerWon;

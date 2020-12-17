@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Grid {
 
-    public static int CELLS = 10;
+    public static int CELLS = 100;
     public static int SIZE = 100;
     private static Grid instance = null;
     private Unit[][] allUnit;
@@ -38,7 +38,7 @@ public class Grid {
 
         int cellX = (int) (unit.getPosition().getCenterX() / SIZE);
         int cellY = (int) (unit.getPosition().getCenterY() / SIZE);
-        
+
         unit.setPrev(null);
         unit.setNext(allUnit[cellX][cellY]);
         allUnit[cellX][cellY] = unit;
@@ -59,7 +59,7 @@ public class Grid {
         int rangeCell = (int) (range / SIZE);
         int cellX = unit.getPosition().getCenterX() / SIZE;
         int cellY = unit.getPosition().getCenterY() / SIZE;
-        
+
         if (cellX - rangeCell < 0) {
 
             startCellX = 0;
@@ -102,7 +102,7 @@ public class Grid {
             for (int j = startCellY; j < endCellY; j++) {
 
                 Unit unitInThisCell = allUnit[i][j];
-                System.err.println(i + " " + j);
+               
                 while (unitInThisCell != null) {
                     /*return him self*/
                     if (unitInThisCell.getOwner().teamId != unit.getOwner().teamId) {
@@ -111,6 +111,7 @@ public class Grid {
                             if (unitInThisCell.getPosition().getCenterY() <= unit.getPosition().getCenterY() + range && unitInThisCell.getPosition().getCenterY() >= unit.getPosition().getCenterY() - range) {
 
                                 inRange.add(unitInThisCell);
+                                System.err.println(unitInThisCell.getUnitType().getName());
 
                             }
 
@@ -122,7 +123,7 @@ public class Grid {
             }
 
         }
-       
+
         return (inRange);
         /*int Range = (int) (unit.getProperties().get(1).getPropertyValue());
          int cellX = (int)(unit.getPosition().getCenterX() / SIZE);
@@ -168,14 +169,13 @@ public class Grid {
     }
 
     public void start() {
-        
-        
+
         for (int i = 0; i < CELLS; i++) {
             for (int j = 0; j < CELLS; j++) {
                 Unit unit = allUnit[i][j];
                 while (unit != null) {
-                   // System.out.println("name :" + unit.getUnitType().getName());
-                    
+                   
+
                     unit.start();
                     unit = unit.getNext();
 
@@ -183,24 +183,26 @@ public class Grid {
             }
         }
     }
-    public void end(){
-        
-        
-     for (int i = 0; i < CELLS; i++) {
+
+    public void end() {
+
+        for (int i = 0; i < CELLS; i++) {
             for (int j = 0; j < CELLS; j++) {
                 Unit unit = allUnit[i][j];
                 while (unit != null) {
-                   // System.out.println("name :" + unit.getUnitType().getName());
+                    
+
                     unit.stop();
                     unit = unit.getNext();
 
                 }
             }
         }
-    
+
     }
-    public void notifyAllUnits(Unit destroyedUnit){
-    
+
+    public void notifyAllUnits(Unit destroyedUnit) {
+
         for (int i = 0; i < CELLS; i++) {
             for (int j = 0; j < CELLS; j++) {
                 Unit unit = allUnit[i][j];
@@ -211,57 +213,77 @@ public class Grid {
                 }
             }
         }
-    
+
     }
-    public void removeUnit(Unit unit){
-        
+
+    public void removeUnit(Unit unit) {
+
         int cellX = (int) (unit.getPosition().getCenterX() / SIZE);
         int cellY = (int) (unit.getPosition().getCenterY() / SIZE);
-        
+
         int X = unit.getPosition().getCenterX();
         int Y = unit.getPosition().getCenterY();
-        
+
         Unit unitInThisCell = allUnit[cellX][cellY];
-        
-        while(unitInThisCell != null){
-        
-            if(unitInThisCell.getPosition().getCenterX() == X && unitInThisCell.getPosition().getCenterY() == Y){
-            
-            if(unitInThisCell.getPrev() == null){
-            
-                allUnit[cellX][cellY] = unitInThisCell.getNext();
-                if(unitInThisCell.getNext() != null){
-                unitInThisCell.getNext().setPrev(null);
+
+        while (unitInThisCell != null) {
+
+            if (unitInThisCell.getPosition().getCenterX() == X && unitInThisCell.getPosition().getCenterY() == Y) {
+
+                if (unitInThisCell.getPrev() == null) {
+
+                    allUnit[cellX][cellY] = unitInThisCell.getNext();
+                    if (unitInThisCell.getNext() != null) {
+                        unitInThisCell.getNext().setPrev(null);
+                    }
+                    unitInThisCell.setNext(null);
+
+                } else if (unitInThisCell.getNext() == null) {
+
+                    unitInThisCell.getPrev().setNext(null);
+                    unitInThisCell.setPrev(null);
+
+                } else {
+
+                    unitInThisCell.getPrev().setNext(unitInThisCell.getNext());
+                    unitInThisCell.getNext().setPrev(unitInThisCell.getPrev());
+                    unitInThisCell.setNext(null);
+                    unitInThisCell.setPrev(null);
+
                 }
-                unitInThisCell.setNext(null);
-                
-            
-            } else if(unitInThisCell.getNext() == null){
-            
-                unitInThisCell.getPrev().setNext(null);
-                unitInThisCell.setPrev(null);
-            
+
+                break;
+
             } else {
-            
-                unitInThisCell.getPrev().setNext(unitInThisCell.getNext());
-                unitInThisCell.getNext().setPrev(unitInThisCell.getPrev());
-                unitInThisCell.setNext(null);
-                unitInThisCell.setPrev(null);
+
+                unitInThisCell = unitInThisCell.getNext();
+
+            }
+
+        }
+
+    }
+
+    public void printBoardInfo(){
+    
+        Unit unitInThisCell;
+        for(int i = 0; i < CELLS; i++){
+        
+            for(int j = 0; j < CELLS; j++){
+                unitInThisCell = allUnit[i][j];
+                while(unitInThisCell != null){
+                
+                    System.out.println(unitInThisCell.getUnitType().getName() + "(" + unitInThisCell.getPosition().getCenterX() + unitInThisCell.getPosition().getCenterY()
+                    + ")" + unitInThisCell.getProperties().get(0).getPropertyValue());
+                    
+                    unitInThisCell = unitInThisCell.getNext();
+                
+                }
             
             }
-            
-            
-            
-            break;
-            
-            } else {
-            
-                unitInThisCell = unitInThisCell.getNext();
-            
-            } 
         
         }
-        
+    
     
     }
 }

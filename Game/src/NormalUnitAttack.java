@@ -19,7 +19,7 @@ public class NormalUnitAttack extends UnitAttack{
     @Override
     public void PerformAttack(Unit unit, double damage) {
         
-        System.out.println("Kaka");
+        
         unit.acceptDamage(damage);
     }
 
